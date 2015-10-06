@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="abstract" class="abstract-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>{{theme.title}}</h2>
+					{% if abstracts %}
+					<table class="tg">
+					  <tr>
+						<th class="tg-031e">Title</th>
+						<th class="tg-031e">Submitted By</th>
+						<th class="tg-031e">Affiliation</th>
+						<th class="tg-031e">Presentation</th>
+					  </tr>
+					{% for abstract in abstracts %}
+					  <tr>
+						  <td class="tg-4eph"><a href="/programme/abstracts/{{abstract.id}}">{{abstract.title|slice:":100"}} ...</a></td>
+						  <td class="tg-4eph"><a href="/programme/profiles/{{abstract.author.user.id}}">{{abstract.author.user.first_name}} {{abstract.author.user.last_name}}</a></td>
+						  <td class="tg-4eph">{{abstract.author.affiliation}}</a></td>
+						  <td class="tg-4eph">{{abstract.delivery}}</td>
+					  </tr>
+					{% endfor %}
+					</table>		
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

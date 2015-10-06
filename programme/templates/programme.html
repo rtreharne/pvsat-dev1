@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+{% load thumbnail %}
+
+    <section id="themes" class="programme-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-sm-offset-2">
+                    <h2 class="center">Conference Themes</h2>
+                    <ol>
+                    {% for theme in themes %}
+					<li><a href="/programme/themes/{{theme.id}}">{{theme.title}}</a></li>
+                        <br />
+                    {% endfor %}
+                    </ol>
+					<div class="center">
+						<a type="button" class="btn btn-primary" href="/programme/abstracts/">View All Abstracts
+						</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers" class="guest-speakers-programme">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2 class="center">Guest Speakers</h2>
+                    <ul class="list-unstyled">
+                    {% for speaker in speakers %}
+                        <li class="col-sm-3 col-xs-6">
+                            <div id="guest-speakers" class="thumbnail-container">
+                            <img class="profile-pic-lg" src="/media/{{speaker.pic}}" name="{{speaker.forename}} {{speaker.surname}}">
+                            <h4>{{speaker.forename}} {{speaker.surname}}</h4>
+                            <p>{{speaker.affiliation}}</p>
+							<!--<p title="{{speaker.title}}">"{{speaker.title|slice:":50"}} ..."-->
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="exhibitors" class="exhibitors-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2 class="center">Exhibitors</h2>
+					<ul class="list-unstyled">
+					{% for exhibitor in exhibitors %}
+						<li class="col-sm-3">
+							<div class="thumbnail-container">
+                                <a href="{{exhibitor.url}}" target="_blank"><img src="/media/{{exhibitor.logo}}" name="{{exhibitor.name}}"></a>
+							</div>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-lg-8 col-sm-offset-2">
+                    <p>PVSAT-12 provides opportunities for leading UK companies to interact with the world-leading UK academic photovoltaics community.<p>
+                    <p>We invite potential exhibitors to register by completing the following form:</p>
+					<p class="center">
+					<a type="button" class="btn btn-primary" href="/media/forms/exhibitor_registration.doc">
+						<span class="glyphicon glyphicon-file"></span> Form</span> 
+					</a>
+					</p>
+                    <p>Each exhibitor is granted two complementary delegate places and unrestricted access to all areas and activities of the conference including conference receptions and both conference dinners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="sponsors" class="sponsor-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2 class="center">Sponsors</h2>
+					<ul class="list-unstyled">
+					{% for sponsor in sponsors %}
+						<li class="col-sm-3">
+							<div class="thumbnail-container">
+                                <a href="{{sponsor.url}}" target="_blank"><img src="/media/{{sponsor.logo}}" name="{{sponsor.name}}"></a>
+							</div>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-lg-8 col-sm-offset-2">
+					<p>Opportunities exist for named sponsoship of individual elements of the conference, e.g. prizes, receptions, coffee breaks, dinner, proceedings etc.</p>
+					<p>Companies and organisations intereted in sponsorship of PVSAT-12 should contact the Solar Energy Secretariat for further information.</p>
+					<p class="center">
+					<a type="button" class="btn btn-primary" href="/media/forms/sponsorship_info.doc">
+						<span class="glyphicon glyphicon-file"></span> More Info</span> 
+					</a>
+					</p>
+				</div>
+			</div>
+        </div>
+    </section>
+
+    <section id="contributors" class="exhibitors-section">
+        <div class="container center">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2 class="center">Contributors</h2>
+					{% for author in authors %}
+					<a href="/programme/profiles/{{author.user.id}}">
+					    <div style="min-height: 110px;" class="col-md-2 col-sm-3 col-xs-4">
+							{% thumbnail author.picture "100x100" crop="center" as im %}
+							<img class="profile-pic" src="{{im.url}}">
+							<p>{{author.user.first_name}} {{author.user.last_name}}</p>
+							{% endthumbnail %}
+						</div>
+					</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

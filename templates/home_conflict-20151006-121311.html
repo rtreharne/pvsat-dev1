@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class = "col-lg-12 block splash">
+                <br />
+                <br />
+                <div class="col-md-8 block" style="text-align: left">
+                    <img class="logo" src="/static/img/pvsat_web.png">
+                    <div class="block">
+                    <div class="col-sm-6 block">
+                        <h1>PVSAT-12</h1>
+                        <h2>6 - 8 April 2016</h2>
+                        <h3><a href="{% url 'venue' %}">University of Liverpool, UK</a></h3>
+                        <p>Organized by <a href="http://www.uk-ises.org/">The Solar Energy Society (UK-ISES)</a></p>
+                        <!---
+                        <p class="share">
+                            <a href="https://twitter.com/pvsat12" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+                            <a href="http://facebook.com" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+                            <a href="http://plus.google.com" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                        </p>
+                        -->
+                    </div>
+
+                    <div class="col-sm-6 block">
+                        <ul class="list-unstyled">
+                        <li><a class="btn btn-primary page-scroll" href="{% url 'submit_abstract' %}">Submit an Abstract</a></li>
+                            <li><a class="btn btn-primary page-scroll" href="">Register to Attend</a></li>
+                        <li><a class="btn btn-primary page-scroll" href="{% url 'bursary' %}">Apply for a Bursary</a></li>
+                        </ul>
+                        <br />
+                    </div>
+                    </div>
+
+                    <div class="col-sm-11">
+                        <p style="text-align: justify; font-size:1.2em;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sollicitudin, augue vitae ullamcorper rutrum, tellus neque lacinia arcu, vitae pretium urna lacus et velit. Proin mollis lobortis magna, non convallis risus. Curabitur id velit consequat, mattis lacus non, suscipit metus. Fusce nibh eros, aliquet at ante nec, interdum gravida libero. Fusce pharetra turpis dictum, pharetra neque id, commodo neque. Fusce pellentesque malesuada aliquam. Morbi nec lobortis velit. Aliquam aliquet lorem nec tellus finibus, vel rutrum urna convallis.</p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 splash-box">
+                    <div>
+                    <img class="logo" style="max-width:400px;" src="/static/img/SS.png">
+                    <h2>Research Methods in Solar PV</h2>
+                    <h3>5 April 2016</h3>
+                    <h4>Stephenson Institute for Renewable Energy, University of Liverpool</h4>
+                    <p>A one day workshop ideal for early PhD students in the field of PV. Organised by the EPSRC SuperSolar PV Hub in association with PVSAT</p>
+                    <br/>
+                    <a class="btn btn-primary page-scroll" href="">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if blog %}
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-sm-offset-2">
+                    <h2 class="center">Blog</h2>
+                    <h3>{{articles.title}}</h4>
+                    <p>{{articles.body|slice:":255"}} ...</p>
+                </div>
+            </div>
+			<br />
+			<div class="col-lg-12 center">
+				<a class="btn btn-primary page-scroll" href="{% url 'articles' %}">Read More</a>
+			</div>
+        </div>
+    </section>
+    {% endif %}
+
+   
+    {% if speakers %}
+    <section id="guest-speakers" class="programme-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+		    <h2 class="center">Guest Speakers</h2>
+		    <ul class="list-unstyled">
+			{% for speaker in speakers|slice:":4" %}
+			<li class="col-sm-3">
+			    <div class="thumbnail-container">
+				<img class="profile-pic-lg" src="/media/{{speaker.pic}}" name="{{speaker.forename}} {{speaker.surname}}">
+				<h4>{{speaker.forename}} {{speaker.surname}}</h4>
+				<p>{{speaker.affiliation}}</p>
+                <p title="{{speaker.title}}">"{{speaker.title|slice:":50"}} ..."
+			    </div>
+			</li>
+			{% endfor %}
+		    </ul>
+                </div>
+            </div>
+			<br />
+			<div class="col-lg-12 center">
+				<a class="btn btn-primary page-scroll" href="{% url 'programme' %}">Full Programme</a>
+			</div>
+        </div>
+        <ul>
+    </section>
+    {% endif %}
+
+    {% if sponsors %}
+    <section id="sponsors" class="sponsor-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2 class="center">Sponsors</h2>
+					<ul class="list-unstyled">
+					{% for sponsor in sponsors %}
+						<li class="col-sm-3">
+							<div class="thumbnail-container">
+								<a href="{{sponsor.url}}" target="_blank"><img src="/media/{{sponsor.logo}}" name="{{sponsor.name}}">
+							</div>
+						</li>
+					{% endfor %}
+					</ul>
+                </div>
+            </div>
+			<br />
+			<div class="col-lg-12 center">
+				<a class="btn btn-primary page-scroll" href="{% url 'programme' %}#sponsors">Become a Sponsor!</a>
+			</div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}

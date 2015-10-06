@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>PVSAT</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/bare.css" %}">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">  </head>
+  <body>
+
+  <!-- /dl-menuwrapper -->
+	<div class="menu-area">
+    	<div id="dl-menu" class="dl-menuwrapper">
+            <!--<button class="dl-trigger">Open Menu</button>-->
+			<ul class="dl-menu">
+				<li>
+					<a href="#intro">Home</a>
+				</li>
+				<li><a href="#programme">Programme</a></li>
+                <li>Author Information</li>
+                <li>Bursaries</li>
+                <li><a href="#exhibition">Exhibition</a>
+				<li><a href="#sponsor">Sponsors</a></li>
+				<li>Venue</li>
+                <li>Accommodation</li>
+                <li>Travel</li>
+                <li><a href="#committee">PVSAT committee</a></li>
+				<li><a href="http://pvsat.org.uk">PVSAT Archive</a></li>
+			</ul>
+		</div>
+	</div>	
+
+    <hr />
+
+    <!-- intro area -->	  
+    <section id="intro">
+    <div id="intro">
+		<div class="intro-text">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="brand">
+							<h1><a href="index.html">PVSAT-12</a></h1>
+							<div class="line-spacer"></div>
+							<p><span>6 - 8 April 2016</span></p>
+							<h4>University of Liverpool</h4>
+						</div>
+					</div>
+				</div>
+                <!--social buttons
+                <div class="row mar-top30 ">
+                    <div class="col-md-offset-2 col-md-8">
+                        <ul class="social-network">
+                            <li><a href="#">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span></a>
+                            </li>
+                            <li><a href="#">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span></a>
+                            </li>
+                            <li><a href="#">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span></a>
+                            </li>
+                        </ul>
+                    </div>			
+                </div>-->
+                </div>
+        </div>
+    </div>
+    </section>
+
+    <hr />
+
+    <!--programme-->
+    <section id="programme">
+    <div>
+        <h2>Conference Programme</h2>
+    </div>
+    <div>
+        <p>Here is the 'final' version of the PVSAT 11 conference programme which is subject to change</p>
+        <p><a href="{% static 'files/programme_final.pdf' %}" target="_blank">PVSAT-11 'final' conference programme</a></p>
+    </div>
+    <div class="section-heading white">
+    <h2>Guest Speakers</h2>
+    </div>
+    {% if speakers %}	
+	    <div>
+            <ul>
+                {% for speaker in speakers%}
+                <li class="col-sm-3">
+                    <div class="fff">
+                        <img src="/media/{{speaker.pic}}">
+                    </div>
+                        <div class="caption">
+                            <h4>{{speaker.forename}} {{speaker.surname}}</h4>
+                            <p>{{speaker.affiliation}}</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    </section>
+
+    <hr />
+	  
+    <!-- Sponsors -->
+    <section id="sponsor">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="section-heading">
+                    <h2>Sponsored by</h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+        {% if sponsors %}
+            {% for sponsor in sponsors %}
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="box-team wow">
+                    <a href="{{sponsor.url}}" target=_"blank">
+                        <img src="/media/{{sponsor.logo}}" alt="" />
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <div>
+            <p>Opportunities exist for named sponsorship of individual elements of the conference, e.g. prizes, receptions, coffee breaks, dinner, proceedings etc.</p>
+            <p>Companies and organisations interested in sponsorship of PVSAT-11 should contanct the Solar Energy Society Secretariat for further information.</p>
+            <p><a href="{% static 'files/sponsorship_table.doc' %}" target="_blank">PVSAT-11 SPONSORSHIP TABLE</a>
+       </div>
+    </div>
+    </section>	  
+
+    <hr />
+
+    <!--committee-->
+    <section id="committee">
+    <div>
+        <h2>Organising Committee</h2>
+    </div>
+    {% if committee %}	
+	    <div>
+            <ul>
+                {% for member in committee %}
+                <li class="col-sm-3">
+                    <div class="fff">
+                        <img src="/media/{{member.pic}}">
+                    </div>
+                        <div class="caption">
+                            <h4>{{member.forename}} {{member.surname}}</h4>
+                            <p>{{member.affiliation}}</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    </section>
+
+    <hr />
+    <section id="exhibition">
+    <div>
+        <h2>Exhibit at PVSAT-11</h2>
+    </div>
+    <div>
+        <p>PVSAT-11 provides opportunites for leading UK companies to interact the world-leading UK academic community.</p>
+        <p>PVSAT-11 invites potential exhibitors to register by completing and submitting the following form:</p>
+        <p><a href="{% static 'exhibitor_registration.doc' %}" target="_blank">PVSAT-11 EXHIBITORS REGISTRATION FORM</a></p>
+        <p>Presently exhibitors include:</p>
+        <div>
+        {% if exhibitors %}
+            {% for exhibitor in exhibitors%}
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="box-team wow">
+                    <a href="{{exhibitor.url}}" target=_"blank">
+                        <img src="/media/{{exhibitor.logo}}" alt="" />
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    </section>
+
+    <hr />
+
+    <!--footer-->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p>Copyright &copy;2015 Pixel Corral. All rights reserved.</a></p>
+				    <p>|<a href="/admin/" target="_blank">Admin</a>|</p>
+				</div>
+			</div>		
+		</div>	
+	</footer>
+</html>

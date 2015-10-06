@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="register" class="register-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-sm-offset-2">
+					<h2>Submit Paper</h2>
+					
+					{% if submitted %}
+					<p>Thank you for submitting an paper</p>
+					<a href="{% url 'dashboard' %}">Return to dasboard</a>
+					{% else %}
+					<p>
+					<a type="button" class="btn btn-primary" href="/media/forms/abstract_template.docx">
+						<span class="glyphicon glyphicon-file"></span> Template</span> 
+					</a>
+					</p>
+
+					<form id = "abstract" method="post" action="/authors/submit_abstract/" enctype="multipart/form-data">
+
+						{% csrf_token %}
+
+						{{abstract_form.as_ul}}
+
+
+						<input class="btn btn-primary page-scroll" type="submit" name="submit" value="Submit" />
+
+					</form>
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="{% url 'dashboard' %}">Cancel</a>
+					</div>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

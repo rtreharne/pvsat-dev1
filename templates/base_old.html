@@ -1,0 +1,46 @@
+!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>{% block title %}PVSAT-12{% endblock %}</title>
+    <link href="{% static "css/main.css" %}" rel="stylesheet" media="screen">
+</head>
+
+<body>
+
+    <!--header-->
+    {% block nav %}
+	<div class="menu-area">
+        <div id="dl-menu" class="dl-menuwrapper">
+            <button class="dl-trigger">Open Menu</button>
+            <ul class="dl-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'articles' %}">Blog</a></li>
+                <li><a href="{% url 'programme' %}">Programme</a></li>
+                <li><a href="">Exhibit</a></li>
+                <li><a href="">Venue</a></li>
+                <li><a href="">Sponsors</a></li>
+                <li><a href="{% url 'committee' %}">Committee</a></li>
+                <li><a href="">Archive</a></li>
+                <li><a href="">Bursaries</a></li>
+                <li><a href="">Authors</a></li>
+            </ul>
+        </div>
+    </div>	
+    {% endblock %}
+
+    <hr />
+    
+    <!--page content-->
+    {% block content %}
+    {% endblock %}
+
+    <hr />
+
+    {% block footer %}
+        <p>Copyright Pixel Corall 2015</p>
+        <p><a href="/admin/" target="_blank">Admin</a></p>
+    {% endblock %}
+    
+</body>
+		

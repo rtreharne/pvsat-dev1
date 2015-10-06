@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="blog" class="blog-section-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="center">Conference Blog</h2>
+                    <div class="articles">
+                    {% for article in articles %}
+					<section id="{{article.id}}">
+						<h3><a href="/blog/{{article.id}}">{{article.title}}</a></h3>
+					<a href="/programme/profiles/{{article.author.author.user.id}}"><img class="profile-pic" src="/media/{{article.author.author.picture}}"></a>
+					<h4>Article by <a href="/programme/profiles/{{article.author.author.user.id}}">{{article.author.author.user.first_name}} {{article.author.author.user.last_name}}</a>, {{article.author.author.affiliation}}</h4>
+					<p>{{article.body|slice:":480"}} <a href="/blog/{{article.id}}">... (read more)</a></p>
+					<p class="share">
+					<a href="https://twitter.com/intent/tweet?text='{{article.title|slice:":50"}} ...' by {{article.author.author.user.first_name}} {{article.author.author.user.last_name}} robtreharne.pythonanywhere.com/blog/{{article.id}}/ @PVSAT12 @livuni %23pvsatblog" target=="_blank"><i class="fa fa-twitter-square"></i></a>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=robtreharne.pythonanywhere.com/blog/{{article.id}}/" target="_blank"><i class="fa fa-facebook-square"></i></a>
+						<a href="https://plus.google.com/share?url=robtreharne.pythonanywhere.com/blog/{{article.id}}/"><i class="fa fa-google-plus-square" target=="_blank"></i></a>
+						<a href="https://www.linkedin.com/shareArticle?mini=true&url=robtreharne.pythonanywhere.com/blog/{{article.id}}/&title={{article.title}}&summary=PVSAT-12 blog article by {{article.author.author.user.first_name}} {{article.author.author.user.last_name}}" target=="_blank"><i class="fa fa-linkedin-square"></i></a>
+					</p>
+                    <p><strong>Date: {{article.pub_date}}</strong></p>
+                    <hr />
+                    <br />
+                    {% endfor %}
+					</section>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

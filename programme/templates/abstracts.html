@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+    <section id="abstract" class="abstract-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2 class="center">Abstracts</h2>
+					{% for abstract in abstracts %}
+					<a href="/programme/abstracts/{{abstract.id}}">
+							<div class="col-lg-8 col-sm-offset-2">
+								<h3>{{abstract.title|slice:":100"}}</h3> 
+								<h4>{{abstract.author.user.first_name}} {{abstract.author.user.last_name}}, {{abstract.author.affiliation}}</h4>
+							</div>
+					</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

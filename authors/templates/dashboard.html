@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+    <section id="register" class="dashboard-profile-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>{{user.first_name}} {{user.last_name}}</h2>
+					{% thumbnail profile.picture "150x150" crop="center" as im %}
+					<img class="profile-pic-lg" src="{{im.url}}" name="{{user.first_name}} {{user.last_name}}">
+					{% endthumbnail %}
+					<h3>{{profile.affiliation}}</h3>
+					<p>
+						{% if profile.url %}
+						<a href="{{profile.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
+						{% endif %}
+						{% if profile.linkedin %}
+						<a href="{{profile.linkedin}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
+						{% endif %}
+						{% if profile.twitter %}
+						<a href="{{profile.twitter}}" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+						{% endif %}
+					</p>
+					{% if profile.bio %}
+					<p class="bio">{{profile.bio}}</p>
+					{% endif %}
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="{% url 'update_profile' %}">Update Profile</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <section id="abstracts" class="dashboard-abstract-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>My Abstracts</h2>
+					{% if abstracts %}
+						<table class="tg">
+						  <tr>
+							<th class="tg-031e">id</th>
+							<th class="tg-031e">Title</th>
+							<th class="tg-031e">File</th>
+							<th class="tg-031e">Status</th>
+							<th class="tg-031e">Presentation</th>
+							<th class="tg-031e">Options</th>
+						  </tr>
+						{% for abstract in abstracts %}
+						  <tr>
+							  <td class="tg-4eph">{{abstract.id}}</td>
+							  <td class="tg-4eph"><a href="/programme/abstracts/{{abstract.id}}">{{abstract.title|slice:":50"}} ...</a></td>
+							  <td class="tg-4eph">
+								  {% if abstract.upload %}
+								  <a href="/media/{{abstract.upload}}" target="_blank" >
+									  <span class="glyphicon glyphicon-file"></span>
+								  </a>
+								  {% endif %}
+							  </td>
+							  <td class="tg-4eph">{{abstract.status}}</td>
+							  <td class="tg-4eph">{{abstract.delivery}}</td>
+							  <td class="tg-4eph">
+								  {% if abstract.status == 'Accepted' %}
+								      {% if abstract.delivery == 'Oral' %}
+									  <a class="btn btn-success page-scroll" href="#">Submit Paper</a>
+									  {% else %}
+										  <a class="btn btn-success page-scroll" href="#">Submit Poster</a>
+								      {% endif %}
+								  {% endif %}
+							  </td>
+									  
+
+						  </tr>
+						{% endfor %}
+						</table>		
+					{% else %}
+					    <p>No abstracts submitted<p>
+				    {% endif %}
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="{% url 'submit_abstract' %}">Submit New Abstract</a>
+					</div>
+                </div>
+            </div>
+		</div>
+    </section>
+
+    <section id="register" class="white-section">
+        <div class="container">
+            <div class="row center">
+                <div class="col-lg-8 col-sm-offset-2">
+					<h2 class="center">Author Guidance</h2>
+					<p class="justify">When submitting abstract, paper or poster files please adhere rigidly to the guidance in the templates below. Documents that do not conform will be returned to authors for further editing. If you have any problems submitting then please don't hesitate to <a href="/contact/">contact us</a>.</p>
+					<p>
+					<a type="button" class="btn btn-primary" href="/media/forms/abstract_template.docx">
+						<span class="glyphicon glyphicon-file"></span> Abstract Template</span> 
+					</a>
+		            </p>
+					<p>
+					<a type="button" class="btn btn-primary" href="/media/forms/paper_template.docx">
+						<span class="glyphicon glyphicon-file"></span> Paper Template</span> 
+					</a>
+					<p>
+					<a type="button" class="btn btn-primary" href="/media/forms/poster_template.pptx">
+						<span class="glyphicon glyphicon-file"></span> Poster Template</span> 
+					</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
