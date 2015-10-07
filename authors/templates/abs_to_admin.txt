@@ -2,18 +2,18 @@ Abstract Submitted
 
 ID: {{abstract.unique_id}}
 TITLE: {{abstract.title}}
-CORRESPONDING AUTHOR: {{abstract.author.user.forename}} {{abstract.author.user.surname}}: {{abstract.author.user.email}}
+CORRESPONDING AUTHOR: {{abstract.author.user.first_name}} {{abstract.author.user.last_name}}: {{abstract.author.user.email}}
 DELIVERY PREFERENCE: {{abstract.delivery}}
 
 ABSTRACT:
 
 {{abstract.abstract}}
 
-FILE: {{abstract.upload}}
+FILE: http://{{URL}}/media/{{abstract.upload}}
 
 THEMES:
 
-{% for theme in themes %}
+{% for theme in abstract.themes %}
     {{theme}},
 {% endfor %}
 
