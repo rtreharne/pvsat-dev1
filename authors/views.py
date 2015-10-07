@@ -71,7 +71,7 @@ def submit_abstract(request):
     submitted = False
 
     if request.method == 'POST':
-        abstract_form = AbstractForm(data=request.POST)
+        abstract_form = AbstractForm(request.POST, request.FILES)
 		
         if abstract_form.is_valid():
             abstract = abstract_form.save(commit=False)
@@ -91,15 +91,26 @@ def submit_abstract(request):
             #Email confirmation to user
             subject = 'Abstract Submission Confirmation: %s' % (abstract.unique_id)
 
-            text_content = render_to_string("abs_sub_conf.txt", {'abstract': abstract})
-            html_content = render_to_string("abs_sub_conf.html", {'abstract': abstract})
+            text_content = render_to_string("abs_sub_conf.txt", {'abstract': abstract, 'URL': settings.SITE_URL})
+            html_content = render_to_string("abs_sub_conf.html", {'abstract': abstract, 'URL': settings.SITE_URL})
 
             email = abstract.author.user.email
 
-            msg = EmailMultiAlternatives(subject, text_content, '', [email])
-            msg.attach_alternative(html_content, "text/html")
+            msg1 = EmailMultiAlternatives(subject, text_content, '', [email])
+            msg1.attach_alternative(html_content, "text/html")
 
-            msg.send()
+            #Email confirmation to admin
+
+            subject = 'Abstract %s submitted by %s %s' % (abstract.unique_id, abstract.author.user.first_name, abstract.author.user.last_name)
+
+            text_content = render_to_string("abs_to_admin.txt", {'abstract': abstract, 'URL': settings.SITE_URL})
+
+            msg2 = EmailMultiAlternatives(subject, text_content, '', [settings.ADMIN_EMAIL])
+
+            if settings.EMAIL_STATUS:
+                msg1.send()
+                msg2.send()
+                
 
             abstract_form.save()
 

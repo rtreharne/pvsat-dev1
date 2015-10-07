@@ -50,7 +50,7 @@
 						  </tr>
 						{% for abstract in abstracts %}
 						  <tr>
-							  <td class="tg-4eph">{{abstract.id}}</td>
+							  <td class="tg-4eph">{{abstract.unique_id}}</td>
 							  <td class="tg-4eph"><a href="/programme/abstracts/{{abstract.id}}">{{abstract.title|slice:":50"}} ...</a></td>
 							  <td class="tg-4eph">
 								  {% if abstract.upload %}

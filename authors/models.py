@@ -4,6 +4,14 @@ from programme.models import Theme
 from django.utils import timezone
 from time import time
 from sorl.thumbnail import get_thumbnail, ImageField
+from django.core.exceptions import ValidationError
+
+def validate_file_extension(value):
+    import os
+    ext = os.path.splitext(value.name)[1]
+    valid_extensions = ['.doc', '.docx']
+    if not ext in valid_extensions:
+        raise ValidationError(u'File must not supported. Files must be .doc or .docx')
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -18,10 +26,12 @@ class UserProfile(models.Model):
         return self.user.username
 
 class Abstract(models.Model):
+
+
     author = models.ForeignKey(UserProfile)
     title = models.CharField(max_length=1000)
     abstract = models.TextField(max_length=5000)
-    upload = models.FileField(upload_to='abstract_uploads', blank=True)
+    upload = models.FileField(upload_to='abstract_uploads', validators=[validate_file_extension])
     theme = models.ManyToManyField(Theme)
     unique_id = models.CharField(max_length=11,null=True, blank=True, unique=True)
     
@@ -32,6 +42,7 @@ class Abstract(models.Model):
     status = models.CharField(max_length=25, choices=STATUS, default='Awaiting Decision')
 
     date = models.DateTimeField(default=timezone.datetime.today())
+
 
 
     def __unicode__(self):
