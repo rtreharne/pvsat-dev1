@@ -89,7 +89,7 @@ def submit_abstract(request):
 			   abstract.upload = request.FILES['upload']
 
             #Email confirmation to user
-            subject = 'Abstract Submission Confirmation: {{abstract.unique_id}}'
+            subject = 'Abstract Submission Confirmation: %s' % (abstract.unique_id)
 
             text_content = render_to_string("abs_sub_conf.txt", {'abstract': abstract})
             html_content = render_to_string("abs_sub_conf.html", {'abstract': abstract})
