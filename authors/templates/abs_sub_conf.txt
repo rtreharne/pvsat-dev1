@@ -1,4 +1,4 @@
-Dear {{abstract.author.user.forename}},
+Dear {{abstract.author.user.first_name}},
 
 Your abstract has been successfully submitted. Thank you.
 
