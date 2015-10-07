@@ -82,7 +82,6 @@ def submit_abstract(request):
             #Email confirmation to user
             subject = 'Test'
 
-            '''
             text_content = render_to_string("abs_sub_conf.txt", {'abstract': abstract})
             html_content = render_to_string("abs_sub_conf.html", {'abstract': abstract})
 
@@ -95,9 +94,6 @@ def submit_abstract(request):
             msg.attach_alternative(html_content, "text/html")
 
             msg.send()
-            '''
-
-            send_mail('hello', 'hello', 'settings.DEFAULT_FROM_EMAIL', ['R.Treharne@liverpool.ac.uk'], fail_silently=False)
 
             abstract_form.save()
 
