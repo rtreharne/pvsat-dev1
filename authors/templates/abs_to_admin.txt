@@ -9,7 +9,7 @@ ABSTRACT:
 
 {{abstract.abstract}}
 
-FILE: http://{{URL}}/media/{{abstract.upload}}
+FILE: http://{{URL}}/media/abstract_uploads/{{abstract.upload}}
 
 THEMES:
 
