@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from authors.models import UserProfile, Abstract
 from django.contrib.auth.forms import UserCreationForm
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 @login_required
 def submit_paper(request, abstract_id=1):
@@ -76,6 +77,14 @@ def submit_abstract(request):
             abstract = abstract_form.save(commit=False)
             abstract.author = UserProfile.objects.get(user=request.user)
 
+            try:
+                obj = Abstract.objects.latest('id')
+                id = obj.id + 1
+            except ObjectDoesNotExist:
+                id = 0
+
+            abstract.unique_id = 'PVSAT12_%s' % (str(id).zfill(3))
+
             if 'upload' in request.FILES:
 			   abstract.upload = request.FILES['upload']
 
@@ -86,9 +95,6 @@ def submit_abstract(request):
             html_content = render_to_string("abs_sub_conf.html", {'abstract': abstract})
 
             email = abstract.author.user.email
-
-            msg = EmailMultiAlternatives(subject, text_content, '', [email])
-            msg.attach_alternative(html_content, "text/html")
 
             msg = EmailMultiAlternatives(subject, text_content, '', [email])
             msg.attach_alternative(html_content, "text/html")

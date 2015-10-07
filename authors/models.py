@@ -23,6 +23,7 @@ class Abstract(models.Model):
     abstract = models.TextField(max_length=5000)
     upload = models.FileField(upload_to='abstract_uploads', blank=True)
     theme = models.ManyToManyField(Theme)
+    unique_id = models.CharField(max_length=11,null=True, blank=True, unique=True)
     
     DELIVERY_CHOICE = (('Oral', 'Oral'), ('Poster', 'Poster'))
     delivery = models.CharField(max_length=6, choices=DELIVERY_CHOICE, default='Oral')
