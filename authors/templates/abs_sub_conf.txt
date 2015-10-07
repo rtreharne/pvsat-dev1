@@ -1,1 +1,11 @@
-This is a test
+Dear {{abstract.author.forename}},
+
+Your abstract has been successfully submitted. Thank you.
+
+Your abstract's unique identifier is {{abstract.unique_id}}. Please be sure to quote this in any future correspondence with our conference administrators.
+
+You will be notified whether your abstract has been accepted before 1st Jan 2016.
+
+If you have any question please don't hesitate to contact us.
+
+With thanks, from the PVSAT team.
