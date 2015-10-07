@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, EmailMultiAlternatives
 from authors.forms import UserForm, UserProfileForm, AbstractForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -6,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from authors.models import UserProfile, Abstract
 from django.contrib.auth.forms import UserCreationForm
+from django.conf import settings
 
 @login_required
 def submit_paper(request, abstract_id=1):
@@ -70,15 +73,37 @@ def submit_abstract(request):
         abstract_form = AbstractForm(data=request.POST)
 		
         if abstract_form.is_valid():
-			abstract = abstract_form.save(commit=False)
-			abstract.author = UserProfile.objects.get(user=request.user)
+            abstract = abstract_form.save(commit=False)
+            abstract.author = UserProfile.objects.get(user=request.user)
 
-			if 'upload' in request.FILES:
+            if 'upload' in request.FILES:
 			   abstract.upload = request.FILES['upload']
 
-			abstract_form.save()
+            #Email confirmation to user
+            subject = 'Test'
 
-			submitted = True
+            '''
+            text_content = render_to_string("abs_sub_conf.txt", {'abstract': abstract})
+            html_content = render_to_string("abs_sub_conf.html", {'abstract': abstract})
+
+            email = abstract.author.user.email
+
+            msg = EmailMultiAlternatives(subject, text_content, '', [email])
+            msg.attach_alternative(html_content, "text/html")
+
+            msg = EmailMultiAlternatives(subject, text_content, '', [email])
+            msg.attach_alternative(html_content, "text/html")
+
+            msg.send()
+            '''
+
+            send_mail('hello', 'hello', 'settings.DEFAULT_FROM_EMAIL', ['R.Treharne@liverpool.ac.uk'], fail_silently=False)
+
+            abstract_form.save()
+
+            submitted = True
+
+
 
         else:
 			print abstract_form.errors
