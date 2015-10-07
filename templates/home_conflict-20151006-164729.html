@@ -69,7 +69,7 @@
                     <br/>
                     {% for speaker in speakers %}
                         <div class="col-md-4 col-sm-4 col-xs-6 center block">
-                                {% thumbnail speaker.pic "300x300" crop="center" as im %}
+                                {% thumbnail speaker.pic "200x200" crop="center" as im %}
                                 <img class="profile-pic" src="{{im.url}}">
                                 <p>{{speaker.forename}}
                                    {{speaker.surname}}
@@ -89,9 +89,9 @@
                         <h3>PVSAT-12 is proudly sponsored and supported by:</h3>
                         <br />
                         {% for sponsor in sponsors %}
-                            <div class="col-md-4 col-sm-6 col-xs-12 center block">
-                                    {% thumbnail sponsor.logo "200x100"  as im %}
-                                    <img class="" src="{{im.url}}" style="padding: {{im|margin:"200x100"}};">
+                            <div class="col-md-4 col-sm-6 col-xs-4 center block">
+                                    {% thumbnail sponsor.logo "200x200"  as im %}
+                                    <img class="" src="{{im.url}}" style="padding: {{im|margin:"200x200"}}; width:100%; max-width:200px;">
                                     {% endthumbnail %}
 
                             </div>

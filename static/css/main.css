@@ -432,6 +432,11 @@ div.navbar-collapse.navbar-ex1-collapse.collapse.in {
     background-color: #23675F;
     padding: 20px;
 }
+
+.blog-box p {
+    font-size:1.1em;
+}
+
 .speaker-box {
     color:white;
     background-color: #3896B1;

@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from random import shuffle
 
 def home(request):
-    sponsor_list = Sponsor.objects.all()
+    sponsor_list = Sponsor.objects.order_by('?')[:]
     speaker_list = Speaker.objects.order_by('?')[:]
     try:
         article = Article.objects.latest('pub_date')
