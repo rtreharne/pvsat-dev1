@@ -77,6 +77,14 @@ def submit_abstract(request):
             abstract = abstract_form.save(commit=False)
             abstract.author = UserProfile.objects.get(user=request.user)
 
+            if abstract.tags == "":
+                abstract.tags = None
+            else:
+                abstract.tags = abstract.tags.replace(", ", ",")
+                abstract.tags = abstract.tags.replace(",  ", ",")
+                
+                
+
             try:
                 obj = Abstract.objects.latest('id')
                 id = obj.id + 1

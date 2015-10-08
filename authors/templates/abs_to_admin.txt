@@ -11,9 +11,3 @@ ABSTRACT:
 
 FILE: http://{{URL}}/media/abstract_uploads/{{abstract.upload}}
 
-THEMES:
-
-{% for theme in abstract.themes %}
-    {{theme}},
-{% endfor %}
-

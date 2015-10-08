@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class AbstractAdmin(admin.ModelAdmin):
-    list_display = ( 'short_title', 'view_id', 'view_link', 'delivery', 'status', 'date')
+    list_display = ( 'short_title', 'view_id', 'view_link', 'delivery', 'status', 'date', 'author_registered')
 
     def short_title(self, obj):
         return ("%s ..." % (obj.title[:50]))
