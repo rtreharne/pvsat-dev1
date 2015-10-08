@@ -60,7 +60,7 @@
                         <h3>{{articles.title}}</h4>
                         <p>{{articles.body|slice:":455"}} ...</p>
                         <br />
-                        <a class="btn btn-primary page-scroll" href="{% url 'articles' %}">Read More</a>
+                        <a class="btn btn-primary page-scroll" href="{% url 'articles' %}{{articles.id}}/">Read More</a>
                     </div>
                 </div>
                 <div class="col-md-6">
